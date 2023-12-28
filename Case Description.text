@@ -1,0 +1,96 @@
+PLAN :
+- Basic
+- Standard
+- Premium
+
+ROLE :
+- Hanya bisa pilih 1 PLAN
+- bisa upgrade
+- tidak bisa downgrade
+
+================================================================
+OBJECTIVE :
+- Create feature :
+    - check all plan - DONE
+    - check plan :
+        plan yg digunakan oleh existing user
+    - upgrade_plan :
+        - If DURATION_PLAN > 12 bulan : diskon 5%
+    - NEW_USER :
+        - if refferal_code == data reffreral di database : 4%
+
+==============================================================
+STUDY CASE :
+
+CASE 1 :
+- User Cahya acccess feature check all plan
+    input : -
+    output : tabel
+
+CASE 2 :
+- User shandy access feature check plan :
+    - Notes : shandy available in data
+    input : username
+    output : username, plan yang dipakai, durasi plan
+
+CASE 3 :
+- User ana access feature upgrade_plan :
+    - Notes : Ana > 12 bulan
+    input : username, current_plan, new_plan
+    output : total bayar
+
+CASE 4 :
+- Faizal access new_user :
+    - Standard plan
+    - Refferal code from bagus
+    input : username, plan_selected, refferal_code
+    output : total bayar
+
+
+============================================
+PROPOSED SOLUTION :
+- Create user class
+    attribute : username, current_plan_, duration_plan
+    method : 
+        - check benefit
+            input : -
+            output : benefit dari masing2 plan
+            pcode : 
+                - show all plan benefits
+        - check plan
+            input : username
+            output : username, current_plan_, duration_plan
+            pcode : 
+                - check the user current_plan
+                - print benefit according to user current_plan
+        - upgrade plan
+            input : username, current_plan_, new_plan
+            output : total bayar, 
+                    - if duration plan > 12 bulan : discount : 5
+            pcode :
+                - input new plan
+                - calculate the price to pay
+                    - check if current duration plan > 12 bulan
+                        - if yes, discount = 5%,  else discount = 0%
+                    - calculate the final price
+                        - final price = plan_price * (plan_price * discount)
+                - show final price
+
+- Create new_user class
+    attribute : username
+    method : 
+        - check benefit
+        - pick_plan
+            input : new_plan, refferal_code
+            output : final price 
+            pcode :
+                - input new plan and refferal_code
+                - check if refferal_code exist in data
+                    -  if not exis. raise error "refferal_code not found"
+                    -  if exists, print "refferal_code exists"
+                - calculate price to pay
+                    - check if refferal code exists. 
+                        - if yes, discount = 4%,  else discount = 0%
+                    - calculate the final price
+                        - final price = plan_price * (plan_price * discount)
+                - show final price

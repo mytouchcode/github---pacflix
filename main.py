@@ -14,5 +14,5 @@ Faizal = NewUser('Bagus')
 # CASE 3 - DONE
 #user_1.upgrade_plan(user_1.username, 'Premium Plan')
 
-# CASE 4 
+# CASE 4 - DONE
 Faizal.pick_plan('Basic Plan', 'bagus-9f92')
